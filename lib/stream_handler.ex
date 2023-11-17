@@ -1,4 +1,9 @@
 defmodule TerminalPrompt.StreamHandler do
+  @moduledoc """
+  HTTPoison (HTTP library used by ExNylas) needs a process to stream to.
+  Here we define a simple GenServer to handle the stream, parse and format, then write to the terminal.
+  """
+
   require Logger
   use GenServer
 
@@ -30,7 +35,6 @@ defmodule TerminalPrompt.StreamHandler do
       |> Enum.reduce("", fn x, acc -> acc <> Map.get(x, "suggestion") end)
 
     new_state = state <> joined
-
     IO.write joined
 
     {:noreply, new_state}
@@ -38,6 +42,7 @@ defmodule TerminalPrompt.StreamHandler do
 
   # End of stream, clear state
   def handle_info(%HTTPoison.AsyncEnd{} = _request, _state) do
+    IO.write "\n"
     {:noreply, ""}
   end
 

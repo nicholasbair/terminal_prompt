@@ -1,21 +1,12 @@
 # TerminalPrompt
-
-**TODO: Add description**
+Simple terminal script to demo Nylas smart compose with an event stream.
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `terminal_prompt` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:terminal_prompt, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/terminal_prompt>.
+1. Clone the repo
+2. `cd terminal_prompt`
+3. `mix deps.get`
+4. Add your API creds in `terminal_prompt.ex`
+5. `iex -S mix`
+6. `iex> TerminalPrompt.start`
+7. Enter your prompt
 
