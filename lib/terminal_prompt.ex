@@ -4,7 +4,16 @@ defmodule TerminalPrompt do
   """
 
   def start do
-    {:ok, pid} = GenServer.start_link(TerminalPrompt.StreamHandler, nil)
+    fun = fn {:data, data}, {req, resp} ->
+      data
+      |> String.split("data: ")
+      |> Enum.filter(fn x -> x != "" end)
+      |> Enum.map(&Poison.decode!(&1))
+      |> Enum.reduce("", fn x, acc -> acc <> Map.get(x, "suggestion") end)
+      |> IO.write()
+
+      {:cont, {req, resp}}
+    end
 
     prompt = IO.gets("Enter a prompt: ")
 
@@ -14,7 +23,7 @@ defmodule TerminalPrompt do
         api_key: ""
       },
       prompt,
-      pid
+      fun
     )
   end
 end
