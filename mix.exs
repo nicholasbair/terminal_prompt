@@ -21,7 +21,7 @@ defmodule TerminalPrompt.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_nylas, git: "https://github.com/nicholasbair/ex_nylas.git", branch: "main"},
+      {:ex_nylas, git: "https://github.com/nicholasbair/ex_nylas.git", tag: "v0.3.0"},
       {:poison, "~> 5.0"},
     ]
   end
